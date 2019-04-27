@@ -1,4 +1,5 @@
 import pandas as pd
+from classifiers import regressor, random_forest
 
 train_file_path = 'data/train.csv'
 test_file_path = 'data/test.csv'
@@ -8,23 +9,24 @@ train_data = pd.read_csv(train_file_path)
 test_data = pd.read_csv(test_file_path)
 
 # print a summary
-#print(train_data.describe())
-
+# print(train_data.describe())
 # print columns
-#print(train_data.columns)
+# print(train_data.columns)
 
 # set label - prediction target
 y = train_data.label
-#print(y)
-
-# set picels - features
+# set pixels - features
 X = train_data.iloc[:, 1:]
-#print(X)
 
-from sklearn.tree import DecisionTreeRegressor
-data_model = DecisionTreeRegressor(random_state=1)
+# ****************** CLASSIFY ****************** 
 
-data_model.fit(X, y)
+# data_model = regressor.Regressor(X, y).classify()
+data_model = random_forest.RandomForest(X, y).classify()
+# data_model = regressor.Regressor(X, y).classify()
+# data_model = regressor.Regressor(X, y).classify()
+
+
+# ****************** END CLASSIFY ******************
 
 print("Making predictions for the following 5 houses:")
 print(X.head())
@@ -40,8 +42,8 @@ header="ImageId,Label"
 header=header+'\n'
 file.write(header)
 for i, id in enumerate(predicted_values):
-    print(id)
-    print(type(id))
+    # print(id)
+    # print(type(id))
     str="{},{}".format(i + 1, int(id))
     str=str+'\n'
     file.write(str)
