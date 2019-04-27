@@ -1,5 +1,5 @@
 import pandas as pd
-from classifiers import regressor, random_forest
+from classifiers import regressor, random_forest, linearSVC
 
 train_file_path = 'data/train.csv'
 test_file_path = 'data/test.csv'
@@ -21,8 +21,8 @@ X = train_data.iloc[:, 1:]
 # ****************** CLASSIFY ****************** 
 
 # data_model = regressor.Regressor(X, y).classify()
-data_model = random_forest.RandomForest(X, y).classify()
-# data_model = regressor.Regressor(X, y).classify()
+# data_model = random_forest.RandomForest(X, y).classify()
+data_model = linearSVC.SVC(X, y).classify()
 # data_model = regressor.Regressor(X, y).classify()
 
 
