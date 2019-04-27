@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from classifiers import regressor, random_forest, linearSVC
 
 train_file_path = 'data/train.csv'
@@ -18,13 +19,15 @@ y = train_data.label
 # set pixels - features
 X = train_data.iloc[:, 1:]
 
-# ****************** CLASSIFY ****************** 
+# ****************** CLASSIFY ******************
+start = time.time() 
 
 # data_model = regressor.Regressor(X, y).classify()
 # data_model = random_forest.RandomForest(X, y).classify()
 data_model = linearSVC.SVC(X, y).classify()
 # data_model = regressor.Regressor(X, y).classify()
 
+print(time.time() - start)
 
 # ****************** END CLASSIFY ******************
 
