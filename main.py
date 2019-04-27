@@ -1,6 +1,6 @@
 import pandas as pd
 import time
-from classifiers import regressor, random_forest, linearSVC
+from classifiers import regressor, random_forest, linearSVC, kNN
 
 train_file_path = 'data/train.csv'
 test_file_path = 'data/test.csv'
@@ -20,25 +20,30 @@ y = train_data.label
 X = train_data.iloc[:, 1:]
 
 # ****************** CLASSIFY ******************
+print("TIME LEARN")
 start = time.time() 
 
 # data_model = regressor.Regressor(X, y).classify()
 # data_model = random_forest.RandomForest(X, y).classify()
-data_model = linearSVC.SVC(X, y).classify()
-# data_model = regressor.Regressor(X, y).classify()
+# data_model = linearSVC.SVC(X, y).classify()
+data_model = kNN.KNN(X, y).classify()
+
+
 
 print(time.time() - start)
 
 # ****************** END CLASSIFY ******************
 
-print("Making predictions for the following 5 houses:")
-print(X.head())
-print("The predictions are")
-print(data_model.predict(X.head()))
-print(y.head())
+# print("Making predictions for the following 5 houses:")
+# print(X.head())
+# print("The predictions are")
+# print(data_model.predict(X.head()))
+# print(y.head())
 
-# predicted_values = data_model.predict(test_data)
+print("TIME Predict")
+start = time.time()
 predicted_values = data_model.predict(test_data)
+print(time.time() - start)
 
 file=open('submission.csv','w')
 header="ImageId,Label"
