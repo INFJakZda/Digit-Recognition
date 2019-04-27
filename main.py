@@ -2,6 +2,7 @@ import pandas as pd
 import time
 from classifiers import regressor, random_forest, linearSVC, kNN
 
+# ****************** READ DATA ******************
 train_file_path = 'data/train.csv'
 test_file_path = 'data/test.csv'
 
@@ -19,6 +20,7 @@ y = train_data.label
 # set pixels - features
 X = train_data.iloc[:, 1:]
 
+
 # ****************** CLASSIFY ******************
 print("TIME LEARN")
 start = time.time() 
@@ -28,12 +30,10 @@ start = time.time()
 # data_model = linearSVC.SVC(X, y).classify()
 data_model = kNN.KNN(X, y).classify()
 
-
-
 print(time.time() - start)
 
-# ****************** END CLASSIFY ******************
 
+# ****************** PREDICT ******************
 # print("Making predictions for the following 5 houses:")
 # print(X.head())
 # print("The predictions are")
@@ -45,6 +45,8 @@ start = time.time()
 predicted_values = data_model.predict(test_data)
 print(time.time() - start)
 
+
+# ****************** SAVE RESULTS ******************
 file=open('submission.csv','w')
 header="ImageId,Label"
 header=header+'\n'
